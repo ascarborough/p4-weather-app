@@ -1,102 +1,81 @@
 // Scripts
 
 // Toggle, Show/Hide Drawer
-$('.toggle-drawer').click( function() {
-  
-  $('aside').toggleClass('drawer');
-  
-});
+// Note: Plugin has been updated. Use version 3.1
+// https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js
+// Refer: http://simpleweatherjs.com
 
-// Section 1 Weather
-$('#city-1').on('click', function() {
-  
-  $.simpleWeather({
-    location: 'seattle',
+$.simpleWeather({
+    location: 'forks',
     unit: 'f',
     success: function(weather) {
       // Entire weather object
-      console.log(weather);
+      console.log(weather.code);
       
       // Display Data
-      $('#one .temp').text(weather.temp);
-      $('#one .city').text(weather.city);
-      
-    },
-    error: function(error) {
-      // Show if weather cannot be retreived
-      console.log('Look outside.');
-    }
-  
-  }); 
-  
-});
-
-
-// Section 2 Weather
-$('#city-2').on('click', function() {
-  
-  $.simpleWeather({
-    location: 'new york',
-    unit: 'f',
-    success: function(weather) {
-      // Entire weather object
-      console.log(weather);
-      
-      // Display Data
-      $('#two .temp').text(weather.temp);
-      $('#two .city').text(weather.city);
-      
-    },
-    error: function(error) {
-      // Show if weather cannot be retreived
-      console.log('Look outside.');
-    }
-  
-  }); 
-  
-});
-
-
-
-// Section 3 Weather
-$('#city-3').on('click', function() {
+      $('.temp').text(weather.temp);
+      $('.city').text(weather.city);
      
-    //load weather using your lat/long coordinates
-    navigator.geolocation.getCurrentPosition(function(position) {
+ $('.currently').text(weather.currently) 
+      $('img').attr('src', weather.image);
       
-      // Check lat/long coordinates
-      var lat = position.coords.latitude;
-      var long = position.coords.longitude;
+      //Change Icon 
       
-      console.log(lat, long);
+      $('i').attr('class', 'icon-' + weather.code)
       
-      // Send to SimpleWeather
-      getWeather( lat + ',' + long ); 
-    });
-   
-    var getWeather = function(location) {
-    
-   $.simpleWeather({
-    location: location,
-    unit: 'f',
-    success: function(weather) {
+      //Conditioning Java - cloudy
       
-      // Entire weather object
-      console.log(weather);
-      
-      // Display Data
-      $('#three .temp').text(weather.temp);
-      $('#three .city').text(weather.city);
+       if (weather.code >=0 & weather.code <=30) {
         
+        $('section').addClass('cloudy'),
+$('.safe').text('Safe'),
+$('.safe').addClass('cloudy1'),
+$('.day-0').addClass('cloudy1'),
+$('.day-1').addClass('cloudy1'),
+          $('.day-2').addClass('cloudy1')
+        
+      }
+      
 
+      
+      //Conditioning Java - Sunny
+      
+             if (weather.code >=31 & weather.code <=36) {
+        
+        $('section').addClass('clear')
+      $('.safe').text('Not Safe')  
+ $('.safe').addClass('clear1')  
+               
+$('.day-1').addClass('clear1') 
+  $('.day-2').addClass('clear1') 
+ $('.day-3').addClass('clear1')                     
+      }
+      
+      //Forecast Java
+      
+$('.day-0').text(weather.forecast[0].date);
+$('.day-1').text(weather.forecast[1].date); 
+$('.day-2').text(weather.forecast[2].date);
+      
+
+      console.log(weather.code);
+      
+ 
+      
+      //Navigation Java
     },
     error: function(error) {
-      // Show if weather cannot be retreived
-      console.log('Look Outside.');
+ 
+      console.log('Look outside.');
     }
   
   });
-    
-};
-  
+
+$(function() {
+
+  $(".nav-button").click(function() {
+
+    $(this).parent().parent().toggleClass("closed");
+  });
+
 });
