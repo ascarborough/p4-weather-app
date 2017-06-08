@@ -11,7 +11,7 @@ $('.toggle-drawer').click( function() {
 $('#city-1').on('click', function() {
   
   $.simpleWeather({
-    location: 'dublin',
+    location: 'seattle',
     unit: 'f',
     success: function(weather) {
       // Entire weather object
@@ -36,7 +36,7 @@ $('#city-1').on('click', function() {
 $('#city-2').on('click', function() {
   
   $.simpleWeather({
-    location: 98105,
+    location: 'new york',
     unit: 'f',
     success: function(weather) {
       // Entire weather object

@@ -1,14 +1,15 @@
 /* Styling */
 @import "normalize.css";
 @import "styles.css";
+@import "icons.css";
 
 body {
-    background: lightcoral;
+    background: black;
 }
 
 // Drawer
 aside {
-  background: white;
+  background: rgba(255, 255, 255, 0.71);
   position: fixed;
   height: 100%;
   min-height: 100%;
@@ -33,15 +34,24 @@ section {
 }
 // Section 1
 #one {
-  background: lightcoral;
+  background-image: url("../img/seattle.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 // Section 2
 #two {
-  background: lightcoral;
+  background-image: url("../img/newyork.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 // Section 3
 #three {
-  background: lightcoral;
+  background-image: url("../img/trees.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 // :target Selection from Sidebar
 :target {
